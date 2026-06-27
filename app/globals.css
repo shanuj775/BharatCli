@@ -1,0 +1,206 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --bg: #070b14;
+  --panel: #101827;
+  --cyan: #00e5ff;
+  --emerald: #00d084;
+  --amber: #ff9f1c;
+  --yellow: #ffd60a;
+  --danger: #ff4d4f;
+  --violet: #8b5cf6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at 10% 0%, rgba(0, 229, 255, 0.12), transparent 30%),
+    radial-gradient(circle at 90% 10%, rgba(139, 92, 246, 0.10), transparent 28%),
+    #070b14;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+}
+
+input[type="range"] {
+  accent-color: var(--cyan);
+}
+
+.satellite-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: radial-gradient(circle at center, black, transparent 78%);
+}
+
+.wind-vector {
+  position: absolute;
+  display: block;
+  width: 54px;
+  height: 2px;
+  border-radius: 99px;
+  background: linear-gradient(90deg, transparent, rgba(0, 229, 255, 0.85), transparent);
+  animation: drift 5.5s linear infinite;
+  opacity: 0.55;
+}
+
+.wind-vector::after {
+  content: "";
+  position: absolute;
+  right: 7px;
+  top: -3px;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid rgba(0, 229, 255, 0.85);
+  border-top: 2px solid rgba(0, 229, 255, 0.85);
+  transform: rotate(45deg);
+}
+
+.cloud-band {
+  position: absolute;
+  left: -25%;
+  width: 150%;
+  height: 80px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.10), transparent);
+  filter: blur(18px);
+  animation: clouds 22s linear infinite;
+}
+
+.animation-delay-2 {
+  animation-delay: -8s;
+}
+
+.animation-delay-4 {
+  animation-delay: -15s;
+}
+
+.thermal-overlay {
+  background: radial-gradient(circle at 42% 28%, rgba(255, 77, 79, 0.24), transparent 22%), radial-gradient(circle at 58% 72%, rgba(255, 159, 28, 0.18), transparent 24%);
+}
+
+.rain-overlay {
+  background: radial-gradient(circle at 62% 48%, rgba(0, 229, 255, 0.24), transparent 28%), linear-gradient(135deg, transparent, rgba(0, 229, 255, 0.10));
+}
+
+.aqi-overlay {
+  background: radial-gradient(circle at 46% 34%, rgba(255, 214, 10, 0.28), transparent 28%), radial-gradient(circle at 70% 44%, rgba(255, 77, 79, 0.16), transparent 18%);
+}
+
+.flood-overlay {
+  background: radial-gradient(circle at 56% 58%, rgba(0, 229, 255, 0.30), transparent 34%);
+}
+
+.cyclone-overlay {
+  background: conic-gradient(from 30deg at 72% 42%, transparent, rgba(0, 229, 255, 0.22), transparent, rgba(139, 92, 246, 0.18), transparent);
+}
+
+.fire-overlay {
+  background: radial-gradient(circle at 34% 60%, rgba(255, 77, 79, 0.26), transparent 18%), radial-gradient(circle at 58% 66%, rgba(255, 159, 28, 0.22), transparent 18%);
+}
+
+.soil-overlay {
+  background: radial-gradient(circle at 50% 57%, rgba(0, 208, 132, 0.22), transparent 30%), radial-gradient(circle at 30% 45%, rgba(255, 214, 10, 0.18), transparent 20%);
+}
+
+.reservoir-overlay {
+  background: radial-gradient(circle at 42% 52%, rgba(0, 229, 255, 0.26), transparent 18%), radial-gradient(circle at 60% 62%, rgba(0, 208, 132, 0.18), transparent 20%);
+}
+
+.wind-overlay {
+  background: linear-gradient(120deg, rgba(0, 229, 255, 0.05), rgba(139, 92, 246, 0.12), rgba(0, 208, 132, 0.05));
+}
+
+.spin-slow {
+  transform-origin: center;
+  animation: spin 14s linear infinite;
+}
+
+.typing {
+  overflow: hidden;
+  border-right: 1px solid rgba(0, 229, 255, 0.75);
+  animation: cursor 900ms steps(2) infinite;
+}
+
+.terrain {
+  background:
+    linear-gradient(150deg, rgba(0, 229, 255, 0.10), transparent 40%),
+    repeating-linear-gradient(165deg, rgba(0, 229, 255, 0.16) 0 2px, transparent 2px 22px),
+    radial-gradient(circle at 45% 55%, rgba(0, 208, 132, 0.18), transparent 35%),
+    #08131f;
+  transform: perspective(700px) rotateX(58deg) translateY(70px) scale(1.3);
+  transform-origin: center bottom;
+  min-height: 120%;
+}
+
+.contrast-more {
+  --panel: #0d1422;
+}
+
+.motion-reduce-all * {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  scroll-behavior: auto !important;
+  transition-duration: 0.001ms !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+@keyframes drift {
+  from {
+    translate: -28px 0;
+  }
+  to {
+    translate: 42px 0;
+  }
+}
+
+@keyframes clouds {
+  from {
+    transform: translateX(-20%);
+  }
+  to {
+    transform: translateX(20%);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes cursor {
+  50% {
+    border-color: transparent;
+  }
+}
+
